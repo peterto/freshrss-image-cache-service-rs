@@ -8,6 +8,7 @@ pub struct CachedImage {
     pub data: Vec<u8>,
     pub mime_type: String,
     pub extracted_from_cache: bool,
+    pub filename: String,
 }
 
 impl IntoResponse for CachedImage {
@@ -36,6 +37,50 @@ impl IntoResponse for CachedImage {
             HeaderValue::from_str(cache_status_value).unwrap(),
         );
 
+        let filename_with_ext = format!(
+            "{}.{}",
+            self.filename,
+            mime_to_extension(&self.mime_type).unwrap_or("bin")
+        );
+
+        headers.insert(
+            HeaderName::from_str("Content-Disposition").unwrap(),
+            HeaderValue::from_str(&format!("attachment; filename=\"{}\"", filename_with_ext))
+                .unwrap(),
+        );
+
         response
+    }
+}
+
+fn mime_to_extension(mime_type: &str) -> Option<&'static str> {
+    match mime_type {
+        // Common image formats
+        "image/jpeg" => Some("jpg"),
+        "image/png" => Some("png"),
+        "image/gif" => Some("gif"),
+        "image/webp" => Some("webp"),
+        "image/svg+xml" => Some("svg"),
+        "image/bmp" => Some("bmp"),
+        "image/x-icon" => Some("ico"),
+        "image/vnd.microsoft.icon" => Some("ico"),
+        "image/tiff" => Some("tiff"),
+        "image/avif" => Some("avif"),
+        "image/heic" => Some("heic"),
+        "image/heif" => Some("heif"),
+
+        // Less common but valid image formats
+        "image/x-bmp" => Some("bmp"),
+        "image/x-ms-bmp" => Some("bmp"),
+        "image/apng" => Some("apng"),
+        "image/jxl" => Some("jxl"),
+
+        // RAW formats
+        "image/x-canon-cr2" => Some("cr2"),
+        "image/x-canon-crw" => Some("crw"),
+        "image/x-nikon-nef" => Some("nef"),
+        "image/x-sony-arw" => Some("arw"),
+
+        _ => None,
     }
 }

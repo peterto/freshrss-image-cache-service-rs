@@ -15,6 +15,7 @@ pub struct CachedImagePaths {
     data_folder: PathBuf,
     data_path: PathBuf,
     mime_type_path: PathBuf,
+    filename: String,
 }
 
 #[derive(Clone, Debug)]
@@ -76,6 +77,7 @@ impl AppService {
             data: image_content,
             mime_type,
             extracted_from_cache,
+            filename: cached_image_paths.filename,
         })
     }
 
@@ -100,11 +102,13 @@ impl AppService {
         // Use two first letters of the file name for the intermediate directory, to
         // make sure we don't end up with a huge number of files.
         let data_folder = self.images_dir.join(&image_content_file_name[0..2]);
+        let filename = image_content_file_name.clone();
 
         Ok(CachedImagePaths {
             data_path: data_folder.join(image_content_file_name),
             mime_type_path: data_folder.join(mime_type_file_name),
             data_folder,
+            filename,
         })
     }
 
