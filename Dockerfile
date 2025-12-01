@@ -1,9 +1,9 @@
-FROM rust:1.80-slim AS builder
+FROM rust:1.90-slim AS builder
 
 RUN apt update \
     && apt install -y \
-        pkg-config \
-        libssl-dev \
+    pkg-config \
+    libssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app
@@ -13,14 +13,14 @@ RUN cargo install --path .
 
 ########################################################################################################################
 
-FROM debian:12-slim
+FROM debian:13-slim
 
 LABEL org.opencontainers.image.source=https://github.com/s373r/freshrss-image-cache-service-rs
 
 RUN apt update \
     && apt install -y \
-        ca-certificates \
-        libssl3 \
+    ca-certificates \
+    libssl3 \
     && rm -rf /var/lib/apt/lists/* \
     && update-ca-certificates
 
