@@ -45,7 +45,7 @@ impl IntoResponse for CachedImage {
 
         headers.insert(
             HeaderName::from_str("Content-Disposition").unwrap(),
-            HeaderValue::from_str(&format!("attachment; filename=\"{}\"", filename_with_ext))
+            HeaderValue::from_str(&format!("inline; filename=\"{}\"", filename_with_ext))
                 .unwrap(),
         );
 
@@ -56,7 +56,7 @@ impl IntoResponse for CachedImage {
 fn mime_to_extension(mime_type: &str) -> Option<&'static str> {
     match mime_type {
         // Common image formats
-        "image/jpeg" => Some("jpg"),
+        "image/jpeg" | "image/jpg" => Some("jpg"),
         "image/png" => Some("png"),
         "image/gif" => Some("gif"),
         "image/webp" => Some("webp"),
@@ -81,6 +81,7 @@ fn mime_to_extension(mime_type: &str) -> Option<&'static str> {
         "image/x-nikon-nef" => Some("nef"),
         "image/x-sony-arw" => Some("arw"),
 
+        mt if mt.starts_with("image/") => Some("img"), // generic fallback
         _ => None,
     }
 }
