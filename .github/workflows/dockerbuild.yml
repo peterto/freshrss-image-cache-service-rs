@@ -81,6 +81,7 @@ jobs:
           platforms: linux/amd64
 
   combines-images-into-latest:
+    needs: [free-disk-space-and-build-arm, free-disk-space-and-build-amd64]
     runs-on: ubuntu-latest
     name: combine images
     steps:
