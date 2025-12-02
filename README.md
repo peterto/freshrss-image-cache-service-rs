@@ -11,6 +11,28 @@ the [piccache.php](https://github.com/Victrid/freshrss-image-cache-plugin/blob/m
 
 ## Quick Start
 
+Install [freshrss-image-cache-plugin](https://github.com/Victrid/freshrss-image-cache-plugin) extension, by git cloning into extensions folder for your freshrss installation
+
+```
+git clone https://github.com/Victrid/freshrss-image-cache-plugin.git
+```
+
+Run either development or docker container of the cache server.
+
+Enable "Image Cache" extension, under Settings -> Extensions
+
+Open settings for extension of use the following URL format, can be different if you used an ip/port or reverse proxy, which is different from the php cache service:
+```
+Cache URL: 
+https://freshrss-image-cache-rs.(example).com/?url=
+
+Proactive Cache URL:
+https://freshrss-image-cache-rs.(example).com
+
+Access Token:
+Token you created (if using docker compose, reference your docker-compose.yml).
+```
+
 To start the service locally for development, run just one command:
 
 ```shell
@@ -26,7 +48,7 @@ Here is an example of a Docker Compose configuration for quick deployment:
 
 services:
   cache_server:
-    image: ghcr.io/s373r/freshrss-image-cache-service-rs:latest
+    image: petertoe/freshrss-image-cache-service-rs:latest
     ports:
       - 3000:3000
     volumes:
