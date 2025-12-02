@@ -87,6 +87,6 @@ jobs:
     steps:
       - uses: Noelware/docker-manifest-action@v1
         with:
-          inputs: ${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.ref_name }}-arm64, ${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.ref_name }}-amd64
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
+          inputs: ${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.ref_name }}-arm64, ${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.ref_name }}-amd64
           push: true
