@@ -1,6 +1,6 @@
 # freshrss-image-cache-service-rs
 
-[![Release](https://ghcr-badge.egpl.dev/s373r/freshrss-image-cache-service-rs/latest_tag?label=Release)](https://github.com/kamu-data/kamu-cli/releases/latest)
+[![Release](https://ghcr-badge.egpl.dev/peterto/freshrss-image-cache-service-rs/tags?color=%2344cc11&ignore=latest&n=2&label=release&trim=)](https://github.com/peterto/freshrss-image-cache-service-rs/pkgs/container/freshrss-image-cache-service-rs)
 
 A simple service for caching images locally, specifically designed for
 the [freshrss-image-cache-plugin](https://github.com/Victrid/freshrss-image-cache-plugin) extension. This can be
@@ -69,3 +69,18 @@ make lint
 make image
 make image-push
 ```
+
+## Additional Credits
+
+- [Original Repo of this service by s373r](https://github.com/s373r/freshrss-image-cache-service-rs)
+
+- [dionorgua](https://github.com/dionorgua/freshrss-image-cache-service-rs/tree/add_url_file) to add a reference url source file for each media file cache and 
+ 
+ [970ed7b7e0d58e2720e54037a9c6688dfa568562](https://github.com/peterto/freshrss-image-cache-service-rs/commit/970ed7b7e0d58e2720e54037a9c6688dfa568562)
+
+- [keslerm](https://github.com/keslerm/freshrss-image-cache-service-rs/tree/feature/create_filename) for adding a unique filename if saving the file from the browser and updating Dockerfile for most recent rust version
+
+ [f0b28b6da47877dc88a47a42135b14024c6f2372](https://github.com/peterto/freshrss-image-cache-service-rs/commit/f0b28b6da47877dc88a47a42135b14024c6f2372)
+ 
+ [cbdaaaa1cca2f81e8050e9bbacb6277b4ec943e7](https://github.com/peterto/freshrss-image-cache-service-rs/commit/cbdaaaa1cca2f81e8050e9bbacb6277b4ec943e7)
+
